@@ -2,6 +2,7 @@ import { getReferenceString } from '@medplum/core';
 import { CssBaseline, DefaultTheme, FooterLinks, Header, Loading, useMedplum, useMedplumProfile } from '@medplum/ui';
 import React from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import { EditMembershipPage } from './admin/EditMembershipPage';
 import { InvitePage } from './admin/InvitePage';
 import { ProjectPage } from './admin/ProjectPage';
@@ -17,6 +18,7 @@ import { ResourcePage } from './ResourcePage';
 import { ResourceVersionPage } from './ResourceVersionPage';
 import { SetPasswordPage } from './SetPasswordPage';
 import { SignInPage } from './SignInPage';
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 export function App(): JSX.Element {
@@ -38,6 +40,7 @@ export function App(): JSX.Element {
     <>
       <CssBaseline />
       <DefaultTheme />
+      <ToastContainer />
       {profile && (
         <Header
           onLogo={() => navigate('/')}

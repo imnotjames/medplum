@@ -26,6 +26,7 @@ import {
 } from '@medplum/ui';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { PatientHeader } from './PatientHeader';
 import { getPatient } from './utils';
 
@@ -189,7 +190,15 @@ export function ResourcePage(): JSX.Element {
                 resourceHistory={historyBundle}
                 questionnaires={questionnaires as Bundle<Questionnaire>}
                 onSubmit={(resource: Resource) => {
-                  medplum.update(cleanResource(resource)).then(loadResource).catch(setError);
+                  medplum
+                    .update(cleanResource(resource))
+                    .then(loadResource)
+                    .then(() => {
+                      toast.success('Success Notification !', {
+                        position: toast.POSITION.TOP_CENTER,
+                      });
+                    })
+                    .catch(setError);
                 }}
                 onDelete={() => {
                   if (window.confirm('Are you sure you want to delete this resource?')) {
